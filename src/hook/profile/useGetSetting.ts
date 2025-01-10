@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 
 export function useGetAllSetting(
   setMealToggle?: React.Dispatch<React.SetStateAction<boolean>>,
-  setWeekendSkip?: React.Dispatch<React.SetStateAction<boolean>>,
 ) {
   useEffect(() => {
     const updateState = (
@@ -26,6 +25,6 @@ export function useGetAllSetting(
     }
 
     updateState('mealToggle', setMealToggle)
-    updateState('weekendSkip', setWeekendSkip)
-  }, [setMealToggle, setWeekendSkip])
+    updateState('weekendSkip')
+  }, [setMealToggle])
 }
