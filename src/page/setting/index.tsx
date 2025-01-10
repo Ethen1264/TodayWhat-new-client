@@ -5,7 +5,7 @@ import Logo from '@stories/atoms/Logo'
 import MyProfile from '@stories/atoms/MyProfile'
 import Return from '@stories/atoms/Return'
 import ToggleSwitch from '@stories/atoms/ToggleSwitch'
-import { Allergies, Calendar, Feedback, Rice } from '@stories/icons/index'
+import { Allergies, Feedback, Rice } from '@stories/icons/index'
 import SettingList from '@stories/molecules/SettingList'
 import { useState } from 'react'
 import { useCookies } from 'react-cookie'
@@ -15,9 +15,8 @@ const Setting = () => {
   const [cookies] = useCookies(['SCHUL_NM', 'USER_GRADE', 'USER_CLASS'])
   const { SCHUL_NM = '', USER_GRADE = '', USER_CLASS = '' } = cookies
   const [mealToggle, setMealToggle] = useState<boolean>(false)
-  const [weekendSkip, setWeekendSkip] = useState<boolean>(false)
 
-  useGetAllSetting(setMealToggle, setWeekendSkip)
+  useGetAllSetting(setMealToggle)
 
   return (
     <S.Wrapper>
@@ -49,17 +48,6 @@ const Setting = () => {
               isActive={mealToggle}
               setIsActive={setMealToggle}
               settingKey='mealToggle'
-            />
-          }
-        />
-        <SettingList
-          icons={<Calendar />}
-          text='주말 건너뛰기'
-          components={
-            <ToggleSwitch
-              isActive={weekendSkip}
-              setIsActive={setWeekendSkip}
-              settingKey='weekendSkip'
             />
           }
         />
