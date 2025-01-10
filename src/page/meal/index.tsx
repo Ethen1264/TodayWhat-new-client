@@ -1,6 +1,7 @@
 import DateButton from '@components/DateButton'
 import FilterMealList from '@components/FilterMealList'
 import MealButton from '@components/MealButton'
+import useFormattedDate from '@hook/date/useFormattedDate'
 import { useGetAllergy } from '@hook/profile/useGetAllergy'
 import { Rice } from '@stories/assets/svg'
 import Logo from '@stories/atoms/Logo'
@@ -22,10 +23,8 @@ const Meal = () => {
   useGetAllergy(setSelectedAllergies)
 
   const { data, isLoading } = useQuery<MealResponse>({
-    queryKey: ['mealData', currentDate],
+    queryKey: ['mealData', useFormattedDate(currentDate)],
     queryFn: () => getMeal(cookies, currentDate),
-    staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000,
   })
 
   const mealData: ProcessedMealData = useMemo(() => {
