@@ -1,5 +1,6 @@
 import DateButton from '@components/DateButton'
 import useScheduleCookie from '@hook/cookie/useScheduleCookie'
+import useFormattedDate from '@hook/date/useFormattedDate'
 import { Stroke } from '@stories/assets/svg'
 import Logo from '@stories/atoms/Logo'
 import Return from '@stories/atoms/Return'
@@ -27,7 +28,7 @@ const Schedule = () => {
   const scheduleURL = getScheduleURL(SCHUL_KND_SC_NM)
 
   const { data, isLoading } = useQuery<ScheduleData[]>({
-    queryKey: ['scheduleData', currentDate],
+    queryKey: ['scheduleData', useFormattedDate(currentDate)],
     queryFn: () =>
       getSchedule(
         ATPT_OFCDC_SC_CODE,
@@ -38,8 +39,6 @@ const Schedule = () => {
         scheduleURL,
         currentDate,
       ),
-    staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000,
   })
 
   return (
