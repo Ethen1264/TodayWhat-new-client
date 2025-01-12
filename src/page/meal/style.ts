@@ -52,3 +52,10 @@ export const MealCalorieInfoCotainer = styled.div`
   font-weight: 500;
   line-height: 1.3125rem;
 `
+
+export const ProfileMessage = styled.div`
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 2rem;
+`

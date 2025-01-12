@@ -31,3 +31,9 @@ export const ScheduleContiner = styled.div`
   width: 100%;
   overflow-y: auto;
 `
+export const ProfileMessage = styled.div`
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 2rem;
+`

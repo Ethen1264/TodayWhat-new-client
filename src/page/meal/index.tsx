@@ -8,23 +8,44 @@ import Logo from '@stories/atoms/Logo'
 import MealListSkeleton from '@stories/atoms/MealList/MealListSkeleton'
 import Return from '@stories/atoms/Return'
 import { useQuery } from '@tanstack/react-query'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useCookies } from 'react-cookie'
+import { CookiesType } from 'types/cookies'
 import { MealResponse, ProcessedMealData } from 'types/meal'
 import getMeal from '@apis/Meal/getMeal'
+import { checkProfile } from '@util/checkProfile'
 import * as S from './style'
 
 const Meal = () => {
-  const [cookies] = useCookies(['ATPT_OFCDC_SC_CODE', 'SD_SCHUL_CODE'])
+  const [cookies, setCookies] = useState<CookiesType | null>(null)
   const [currentDate, setCurrentDate] = useState<Date>(new Date())
   const [mealNumber, setMealNumber] = useState<string>('1')
   const [selectedAllergies, setSelectedAllergies] = useState<number[]>([])
+  const [Profilecookies] = useCookies([
+    'SCHUL_NM',
+    'USER_GRADE',
+    'USER_CLASS',
+    'ATPT_OFCDC_SC_CODE',
+    'SD_SCHUL_CODE',
+    'SCHOOL_DDDEP_NM',
+    'USER_DDDEP_NM',
+  ])
+
+  useEffect(() => {
+    const profile = checkProfile(Profilecookies)
+    setCookies(profile)
+  }, [Profilecookies])
 
   useGetAllergy(setSelectedAllergies)
 
   const { data, isLoading } = useQuery<MealResponse>({
-    queryKey: ['mealData', useFormattedDate(currentDate)],
+    queryKey: [
+      'mealData',
+      useFormattedDate(currentDate),
+      JSON.stringify(cookies),
+    ],
     queryFn: () => getMeal(cookies, currentDate),
+    enabled: cookies !== null,
   })
 
   const mealData: ProcessedMealData = useMemo(() => {
@@ -74,7 +95,9 @@ const Meal = () => {
         {isLoading ? '로딩 중...' : mealData.calInfo}
       </S.MealCalorieInfoCotainer>
       <S.MealListContainer>
-        {isLoading ? (
+        {cookies === null ? (
+          <S.ProfileMessage>프로필을 설정해주세요.</S.ProfileMessage>
+        ) : isLoading ? (
           Array.from({ length: 7 }).map((_, index) => (
             <MealListSkeleton key={index} />
           ))
