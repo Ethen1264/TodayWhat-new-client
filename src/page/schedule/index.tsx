@@ -10,7 +10,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { ScheduleData } from 'types/schedule'
 import getSchedule from '@apis/Schedule/getSchedule'
-import getScheduleURL from '@util/lib/getScheduleURL'
+import getScheduleURL from '@util/getScheduleURL'
 import * as S from './style'
 
 const Schedule = () => {

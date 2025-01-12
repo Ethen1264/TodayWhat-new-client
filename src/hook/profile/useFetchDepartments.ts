@@ -1,5 +1,5 @@
 import getDepartment from '@apis/Profile/getDepartment'
-import useUserData from '@util/lib/userData'
+import useUserData from '@util/userData'
 import type { Department } from 'types/department'
 
 const useFetchDepartments = () => {
