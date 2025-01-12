@@ -1,6 +1,6 @@
 import { useState } from 'react'
+import { allergyTransformation } from '@util/allergyTransformation'
 import { useGetAllergy } from '../../../hook/profile/useGetAllergy'
-import { allergyTransformation } from '../../../util/lib/allergyTransformation'
 import RightArrow from '../../icons/RightArrow'
 import * as S from './style'
 

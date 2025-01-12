@@ -10,7 +10,7 @@ import SearchListSkeleton from '@stories/atoms/SearchList/SearchListSkeleton'
 import Select from '@stories/atoms/Select'
 import React, { useState, useEffect } from 'react'
 import { School } from 'types/school'
-import useUserData from '@util/lib/userData'
+import useUserData from '@util/userData'
 import * as S from './style'
 
 const Profile: React.FC = () => {

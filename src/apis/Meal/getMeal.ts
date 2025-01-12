@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getDate } from '@util/lib/getDate'
+import { getDate } from '@util/getDate'
 
 interface Cookies {
   ATPT_OFCDC_SC_CODE?: string
